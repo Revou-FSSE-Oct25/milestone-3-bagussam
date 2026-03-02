@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🛒 RevoShop - Milestone 3 E-Commerce Platform
 
-## Getting Started
+RevoShop adalah platform e-commerce modern yang dibangun menggunakan Next.js 15. Proyek ini merupakan bagian dari Milestone 3 yang mencakup implementasi sistem pengambilan data (Fetching), State Management, Autentikasi Admin, dan fitur CRUD lengkap.
 
-First, run the development server:
+🌟 Fitur Utama
 
-```bash
+1. Katalog Produk (ISR & SSR)
+
+Menampilkan daftar produk dari FakeStore API menggunakan kombinasi Incremental Static Regeneration (ISR) dan Server-Side Rendering (SSR) untuk performa optimal dan data yang selalu diperbarui.
+
+2. State Management (Zustand)
+
+Sistem keranjang belanja (Cart) yang persisten menggunakan Zustand. Pengguna dapat menambah, mengurangi, dan menghapus produk dari keranjang secara real-time.
+
+3. Autentikasi & Middleware
+
+Halaman Login: Membedakan akses antara admin dan user.
+
+Proteksi Rute: Menggunakan Middleware untuk mengamankan folder /admin agar hanya bisa diakses oleh akun dengan role admin.
+
+Akun Demo:
+
+Admin: admin@revoshop.com | Password: admin123
+
+User: user@revoshop.com | Password: user123
+
+4. Admin Dashboard (Full CRUD)
+
+Create: Menambah produk baru melalui formulir di /admin/add.
+
+Read: Melihat daftar inventaris lengkap dalam bentuk tabel di /admin.
+
+Update: Mengubah detail produk melalui halaman /admin/edit/[id].
+
+Delete: Menghapus produk dari daftar (simulasi API).
+
+5. Halaman Statis (SSG)
+
+About Us: Implementasi Static Site Generation (SSG) untuk halaman informasi perusahaan yang cepat dan ramah SEO.
+
+6. Unit Testing
+
+Pengujian fungsionalitas logika keranjang belanja menggunakan Jest untuk memastikan integritas data.
+
+🛠️ Teknologi yang Digunakan
+
+Framework: Next.js 15 (App Router)
+
+Styling: Tailwind CSS
+
+Icons: Lucide-React
+
+State Management: Zustand
+
+Data Source: FakeStore API
+
+Testing: Jest & React Testing Library
+
+🚀 Cara Menjalankan Proyek
+
+Clone Repositori:
+
+git clone [https://github.com/Revou-FSSE-Oct25/milestone-3-bagussam.git](https://github.com/Revou-FSSE-Oct25/milestone-3-bagussam.git)
+cd revoshop
+
+
+Instalasi Dependensi:
+
+npm install
+
+
+Jalankan Server Development:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Buka http://localhost:3000 di browser Anda.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Menjalankan Test:
 
-## Learn More
+npm test
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📂 Struktur Folder Utama
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+src/
+├── app/               # Next.js App Router (Halaman & API)
+│   ├── about/         # Halaman SSG
+│   ├── admin/         # Dashboard CRUD (Protected)
+│   ├── login/         # Autentikasi
+│   ├── product/[id]/  # Detail Produk (SSR)
+│   └── layout.tsx     # Root Layout
+├── components/        # Reusable Components (Navbar, dsb)
+├── lib/               # Utility & API Fetching
+├── store/             # Zustand State Management
+├── middleware.ts      # Auth Protection Logic
+└── tests/             # Jest Unit Testing
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dibuat oleh: [Bagus Sam]
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+RevoU FSSE - Milestone 3
