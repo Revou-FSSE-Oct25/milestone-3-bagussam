@@ -1,97 +1,156 @@
-🛒 RevoShop - Milestone 3 E-Commerce Platform
+🛒 RevoShop
+Modern E-Commerce Platform — Next.js 15
 
-RevoShop adalah platform e-commerce modern yang dibangun menggunakan Next.js 15. Proyek ini merupakan bagian dari Milestone 3 yang mencakup implementasi sistem pengambilan data (Fetching), State Management, Autentikasi Admin, dan fitur CRUD lengkap.
+RevoShop adalah platform e-commerce modern berbasis Next.js 15 (App Router) yang mengimplementasikan hybrid rendering (SSG, SSR, ISR), role-based authentication, middleware protection, state management dengan Zustand, serta admin dashboard dengan fitur CRUD lengkap.
 
-🌟 Fitur Utama
+Project ini dikembangkan sebagai bagian dari RevoU FSSE – Milestone 3.
 
-1. Katalog Produk (ISR & SSR)
+✨ Features
+🛍️ Product Catalog (ISR + SSR)
 
-Menampilkan daftar produk dari FakeStore API menggunakan kombinasi Incremental Static Regeneration (ISR) dan Server-Side Rendering (SSR) untuk performa optimal dan data yang selalu diperbarui.
+Product list menggunakan Incremental Static Regeneration (ISR)
 
-2. State Management (Zustand)
+Product detail menggunakan Server-Side Rendering (SSR)
 
-Sistem keranjang belanja (Cart) yang persisten menggunakan Zustand. Pengguna dapat menambah, mengurangi, dan menghapus produk dari keranjang secara real-time.
+Data diambil dari FakeStore API
 
-3. Autentikasi & Middleware
+Optimized for performance & SEO
 
-Halaman Login: Membedakan akses antara admin dan user.
+🛒 Cart System (Zustand + Persist)
 
-Proteksi Rute: Menggunakan Middleware untuk mengamankan folder /admin agar hanya bisa diakses oleh akun dengan role admin.
+Add to cart
 
-Akun Demo:
+Increase quantity
 
-Admin: admin@revoshop.com | Password: admin123
+Decrease quantity
 
-User: user@revoshop.com | Password: user123
+Remove item
 
-4. Admin Dashboard (Full CRUD)
+Persistent cart (tidak hilang saat refresh)
 
-Create: Menambah produk baru melalui formulir di /admin/add.
+Real-time update
 
-Read: Melihat daftar inventaris lengkap dalam bentuk tabel di /admin.
+🔐 Authentication & Role-Based Access
+Login Role:
 
-Update: Mengubah detail produk melalui halaman /admin/edit/[id].
+Admin
 
-Delete: Menghapus produk dari daftar (simulasi API).
+User
 
-5. Halaman Statis (SSG)
+Route Protection:
 
-About Us: Implementasi Static Site Generation (SSG) untuk halaman informasi perusahaan yang cepat dan ramah SEO.
+Folder /admin diproteksi menggunakan Next.js Middleware
 
-6. Unit Testing
+Hanya role admin yang dapat mengakses dashboard.
 
-Pengujian fungsionalitas logika keranjang belanja menggunakan Jest untuk memastikan integritas data.
+🔑 Demo Accounts
+| Role  | Email                                           | Password |
+| ----- | ----------------------------------------------- | -------- |
+| Admin | [admin@revoshop.com](mailto:admin@revoshop.com) | admin123 |
+| User  | [user@revoshop.com](mailto:user@revoshop.com)   | user123  |
+🛠️ Admin Dashboard (Full CRUD)
+| Action | Route                    |
+| ------ | ------------------------ |
+| Create | `/admin/add`             |
+| Read   | `/admin`                 |
+| Update | `/admin/edit/[id]`       |
+| Delete | `/admin` (Simulated API) |
+Fitur:
 
-🛠️ Teknologi yang Digunakan
+Add new product
 
-Framework: Next.js 15 (App Router)
+Edit product
 
-Styling: Tailwind CSS
+Delete product
 
-Icons: Lucide-React
+Table-based inventory display
 
-State Management: Zustand
+📄 Static Page (SSG)
 
-Data Source: FakeStore API
+Halaman About Us menggunakan Static Site Generation (SSG) untuk performa optimal dan SEO-friendly.
 
-Testing: Jest & React Testing Library
+🧪 Unit Testing
 
-🚀 Cara Menjalankan Proyek
+Menggunakan:
 
-Clone Repositori:
+Jest
 
-git clone [https://github.com/Revou-FSSE-Oct25/milestone-3-bagussam.git](https://github.com/Revou-FSSE-Oct25/milestone-3-bagussam.git)
-cd revoshop
+React Testing Library
 
+Testing mencakup:
 
-Instalasi Dependensi:
+Cart logic
 
-npm install
+Add item
 
+Remove item
 
-Jalankan Server Development:
+Decrease quantity
 
-npm run dev
+State integrity
 
-
-Buka http://localhost:3000 di browser Anda.
-
-Menjalankan Test:
-
-npm test
-
-
-📂 Struktur Folder Utama
-
+🧠 Tech Stack
+| Category         | Technology                   |
+| ---------------- | ---------------------------- |
+| Framework        | Next.js 15 (App Router)      |
+| Styling          | Tailwind CSS                 |
+| Icons            | Lucide React                 |
+| State Management | Zustand                      |
+| Data Source      | FakeStore API                |
+| Testing          | Jest + React Testing Library |
+📂 Project Structure
 📦 src
  ┣ 📂 app
- ┃ ┣ 📂 about
- ┃ ┣ 📂 admin
- ┃ ┣ 📂 login
- ┃ ┣ 📂 product
- ┃ ┗ 📜 layout.tsx
- ┣ 📂 components
- ┣ 📂 lib
- ┣ 📂 store
- ┣ 📜 middleware.ts
- ┗ 📂 tests
+ ┃ ┣ 📂 about          # SSG page
+ ┃ ┣ 📂 admin          # Protected CRUD dashboard
+ ┃ ┣ 📂 login          # Authentication
+ ┃ ┣ 📂 product        # SSR product detail
+ ┃ ┗ 📜 layout.tsx     # Root layout
+ ┣ 📂 components       # Reusable UI components
+ ┣ 📂 lib              # API & utilities
+ ┣ 📂 store            # Zustand state management
+ ┣ 📜 middleware.ts    # Route protection logic
+ ┗ 📂 tests            # Unit testing
+ ⚙️ Installation & Setup
+1️⃣ Clone Repository
+git clone https://github.com/Revou-FSSE-Oct25/milestone-3-bagussam.git
+cd milestone-3-bagussam
+2️⃣ Install Dependencies
+npm install
+3️⃣ Run Development Server
+npm run dev
+
+Buka browser:
+
+http://localhost:3000
+🧪 Run Unit Tests
+npm test
+🏗️ Architecture Highlights
+
+Hybrid Rendering Strategy (SSG + SSR + ISR)
+
+Middleware-based Route Protection
+
+Role-Based Authentication
+
+Persistent Global State with Zustand
+
+Modular & Scalable Folder Structure
+
+Clean App Router Architecture
+
+📈 What This Project Demonstrates
+
+Modern Next.js App Router usage
+
+Advanced rendering patterns
+
+Client & Server separation
+
+Secure route protection
+
+Production-ready state management
+
+Clean component architecture
+
+Unit testing best practices
