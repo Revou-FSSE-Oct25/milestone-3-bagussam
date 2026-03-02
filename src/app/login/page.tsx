@@ -1,14 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-// Import useRouter dari next/navigation biasanya digunakan di Next.js
-// Namun, untuk memastikan kode ini dapat dikompilasi di berbagai lingkungan, 
-// kita akan menambahkan penanganan error sederhana atau mock jika modul tidak ditemukan.
 import { Lock, Mail, Loader2, AlertCircle, ShoppingBag } from 'lucide-react';
 
 /**
- * Halaman Login untuk Admin & User
- * Role 'admin' bisa akses dashboard, role 'user' hanya akses katalog.
+ * Halaman Login (Autentikasi Admin & User)
+ * Memenuhi syarat Milestone 3 poin 2.
  */
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,108 +13,81 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Simulasi navigasi untuk lingkungan yang tidak mendukung next/navigation
-  const handleNavigation = (path: string) => {
-    console.log(`Navigasi ke: ${path}`);
-    window.location.href = path;
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     // Simulasi Autentikasi
-    // Admin Credential: admin@revoshop.com / admin123
-    // User Credential: user@revoshop.com / user123
     setTimeout(() => {
       if (email === 'admin@revoshop.com' && password === 'admin123') {
-        // Simpan Role di Cookie (Simulasi)
         document.cookie = "revo_role=admin; path=/; max-age=3600";
-        document.cookie = "revo_token=mock_token_admin; path=/; max-age=3600";
-        handleNavigation('/admin');
+        document.cookie = "revo_token=mock_admin_token; path=/; max-age=3600";
+        window.location.href = '/admin';
       } else if (email === 'user@revoshop.com' && password === 'user123') {
         document.cookie = "revo_role=user; path=/; max-age=3600";
-        document.cookie = "revo_token=mock_token_user; path=/; max-age=3600";
-        handleNavigation('/');
+        document.cookie = "revo_token=mock_user_token; path=/; max-age=3600";
+        window.location.href = '/';
       } else {
-        setError('Email atau password salah. Coba: admin@revoshop.com / admin123');
+        setError('Kredensial salah. Gunakan: admin@revoshop.com / admin123');
+        setLoading(false);
       }
-      setLoading(false);
     }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12 font-sans">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100">
-        <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 mb-6">
-            <ShoppingBag className="h-8 w-8 text-white" />
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+      <div className="max-w-md w-full bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-gray-200/50 border border-gray-100">
+        <div className="text-center mb-10">
+          <div className="mx-auto h-16 w-16 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100 mb-6">
+            <ShoppingBag className="text-white w-8 h-8" />
           </div>
-          <h2 className="text-3xl font-black text-gray-900 tracking-tight">Selamat Datang</h2>
-          <p className="mt-2 text-sm text-gray-500">
-            Masuk untuk melanjutkan belanja atau mengelola toko
-          </p>
+          <h2 className="text-3xl font-black text-gray-900">Sign In</h2>
+          <p className="text-gray-500 mt-2">Masuk ke RevoShop untuk melanjutkan.</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl flex items-center text-sm gap-2">
+          <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 flex items-center gap-2 text-sm border border-red-100">
             <AlertCircle className="w-4 h-4" /> {error}
           </div>
         )}
 
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Email</label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all outline-none"
-                  placeholder="admin@revoshop.com"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all outline-none"
-                  placeholder="••••••••"
-                />
-              </div>
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input 
+                type="email" required value={email} onChange={e => setEmail(e.target.value)}
+                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                placeholder="admin@revoshop.com"
+              />
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold flex items-center justify-center hover:bg-indigo-700 transition shadow-lg shadow-indigo-100 active:scale-95 disabled:opacity-70"
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
+            <div className="relative">
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input 
+                type="password" required value={password} onChange={e => setPassword(e.target.value)}
+                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+
+          <button 
+            type="submit" disabled={loading}
+            className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition active:scale-95 disabled:opacity-50"
           >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Memproses...</span>
-              </div>
-            ) : (
-              'Masuk Sekarang'
-            )}
+            {loading ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : 'Sign In Now'}
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-gray-400 bg-gray-50 p-4 rounded-xl border border-dashed border-gray-200">
-          <p className="font-bold text-gray-500 mb-1">Akun Demo:</p>
-          <p>Admin: admin@revoshop.com (admin123)</p>
-          <p>User: user@revoshop.com (user123)</p>
+        <div className="mt-8 p-4 bg-gray-50 rounded-2xl border border-dashed border-gray-200 text-center">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Demo Account</p>
+          <p className="text-xs text-gray-500">Admin: admin@revoshop.com (admin123)</p>
         </div>
       </div>
     </div>
