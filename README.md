@@ -83,20 +83,15 @@ npm test
 
 📂 Struktur Folder Utama
 
-src/
-├── app/               # Next.js App Router (Halaman & API)
-│   ├── about/         # Halaman SSG
-│   ├── admin/         # Dashboard CRUD (Protected)
-│   ├── login/         # Autentikasi
-│   ├── product/[id]/  # Detail Produk (SSR)
-│   └── layout.tsx     # Root Layout
-├── components/        # Reusable Components (Navbar, dsb)
-├── lib/               # Utility & API Fetching
-├── store/             # Zustand State Management
-├── middleware.ts      # Auth Protection Logic
-└── tests/             # Jest Unit Testing
-
-
-Dibuat oleh: [Bagus Sam]
-
-RevoU FSSE - Milestone 3
+📦 src
+ ┣ 📂 app
+ ┃ ┣ 📂 about
+ ┃ ┣ 📂 admin
+ ┃ ┣ 📂 login
+ ┃ ┣ 📂 product
+ ┃ ┗ 📜 layout.tsx
+ ┣ 📂 components
+ ┣ 📂 lib
+ ┣ 📂 store
+ ┣ 📜 middleware.ts
+ ┗ 📂 tests
